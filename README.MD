@@ -19,9 +19,6 @@ You can follow the table below:
 - If the number is less or more than 10 numbers, print "This is invalid number".
 - If the number contains letters or symbols, print "This is invalid number".
 
-## Q2:Write a function that receives a list containing the following numbers : 
-- [5, 0, 34, 9, 0, 13, 8]
-- rearranges the list so that the zeros are the end of the list, and finally returns the arranged list.
 
 
 
