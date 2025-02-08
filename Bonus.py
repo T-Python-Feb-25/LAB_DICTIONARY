@@ -7,7 +7,7 @@ def input_weather_data():
     if city not in Weather_Data:
         Weather_Data[city]={}
     while True:
-        date=input("Enter the date (YYYY/MM/DD)same format: ")
+        date=input("Enter the date (YYYY/MM/DD) in the same format: ")
         if re.match(pattern,date):
             if date in Weather_Data[city]:
                 print("The weather data for this date already exists.")
