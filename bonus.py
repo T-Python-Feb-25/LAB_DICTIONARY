@@ -14,13 +14,14 @@ Challenge:
 Extend the program to allow the user to update or delete weather data for a specific city and date.'''
 
 def get_weather_data(): # task 1: Input Weather Data
-    weather_info = []
-    city_name= input("Enter the city name: ")
-    date = input("Enter the date: ")
-    temperature = input("Enter the temperature: ") 
-    humidity = input("Enter the humidity: ")
-    weather_condition = input("Enter the weather condition: ")
-    weather_info.append((city_name,date,temperature,humidity,weather_condition))  
+    weather_info = { }
+    while True :
+        city_name= input("Enter the city name: ")
+        date = input("Enter the date:(dd/mm/year) ")
+        temperature = input("Enter the temperature: ") 
+        humidity = input("Enter the humidity: ")
+        weather_condition = input("Enter the weather condition: ")
+        weather_info[city_name] = (date, temperature, humidity, weather_condition) 
     return weather_info
 weather= get_weather_data()
 print(weather)
