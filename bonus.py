@@ -1,18 +1,3 @@
-'''Bonus (use a new file)
-Exercise: Weather Data Aggregation
-Objective: Write a Python program that aggregates weather data for different cities and provides weather data based on user queries.
-
-Requirements:
-Input Weather Data: Allow the user to input weather data for different cities. Each entry should include the city name, date, temperature, humidity, and weather condition (e.g., sunny, rainy).
-Store Data in a Dictionary: Use a nested dictionary to store the weather data. The outer dictionary's keys will be the city names, and the values will be another dictionary containing date and weather details.
-Query by City: Allow the user to query the weather data by city name, displaying all the recorded weather data for that city.
-Guidelines:
-Use nested dictionaries to store the weather data efficiently.
-Implement separate functions for inputting data, querying by city.
-Validate user inputs to ensure correctness.
-Challenge:
-Extend the program to allow the user to update or delete weather data for a specific city and date.'''
-
 def get_weather_data(): # task 1: Input Weather Data
     weather_info = { }
     while True :
@@ -33,7 +18,26 @@ def get_weather_data(): # task 1: Input Weather Data
             'weather_condition': weather_condition
         }
     return weather_info
-weather= get_weather_data()
-print(weather)
+
+def query_city_weather(weather_info):
+      # Allow the user to query weather information by city
+    while True:
+        city_query = input("Enter a city name to query the weather (or type 'done' to stop): ")
+        
+        if city_query.lower() == 'done':  # Stop if the user types 'done'
+            break
+        
+        # Check if the city exists in the weather data
+        if city_query in weather_info:
+            print(f"\nWeather Information for {city_query}:")
+            print(f"  Date: {weather_info[city_query]['date']}")
+            print(f"  Temperature: {weather_info[city_query]['temperature']}°C")
+            print(f"  Humidity: {weather_info[city_query]['humidity']}%")
+            print(f"  Condition: {weather_info[city_query]['weather_condition']}\n")
+        else:
+            print(f"'{city_query}' not found in the weather data.\n")  
+            
+weather_info = get_weather_data()  # Get the weather info from the user
+query_city_weather(weather_info) 
     
     
