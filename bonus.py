@@ -16,12 +16,22 @@ Extend the program to allow the user to update or delete weather data for a spec
 def get_weather_data(): # task 1: Input Weather Data
     weather_info = { }
     while True :
-        city_name= input("Enter the city name: ")
+        city_name= input("Enter the city name:(or 'done' to finish)  ")
+        if city_name.lower() == 'done':
+            break
         date = input("Enter the date:(dd/mm/year) ")
         temperature = input("Enter the temperature: ") 
         humidity = input("Enter the humidity: ")
         weather_condition = input("Enter the weather condition: ")
-        weather_info[city_name] = (date, temperature, humidity, weather_condition) 
+        weather_info[city_name] = (date, temperature, humidity, weather_condition)
+         
+        # Create a nested dictionary for each city
+        weather_info[city_name] = {
+            'date': date,
+            'temperature': temperature,
+            'humidity': humidity,
+            'weather_condition': weather_condition
+        }
     return weather_info
 weather= get_weather_data()
 print(weather)
