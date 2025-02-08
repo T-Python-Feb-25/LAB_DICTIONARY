@@ -1,23 +1,21 @@
-# تعريف قاموس لتخزين بيانات الطقس
 weather = {
     "Abha": {
         "temperature": 18,
         "humidity": 16,
-        "condition": "sunny"
+        "condition": " sunny "
     },
     "Riyadh": {
         "temperature": 30,
         "humidity": 20,
-        "condition": "cloudy"
+        "condition": " cloudy "
     },
     "Jeddah": {
         "temperature": 28,
         "humidity": 50,
-        "condition": "sunny"
+        "condition": " sunny "
     }
 }
 
-# السماح للمستخدم بالاستعلام عن بيانات الطقس حسب اسم المدينة
 city = input("Enter the city name to query the weather data: ")
 
 if city in weather:
