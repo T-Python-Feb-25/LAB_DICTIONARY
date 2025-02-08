@@ -59,8 +59,11 @@ def get_weather_data():
         weather_condition = input("Enter the weather condition: ")
         
         # Store the data for each city in the dictionary
-        weather_info[city_name] = {
-            'date': date,
+        if city_name not in weather_info:
+            weather_info[city_name] = {}
+
+        # Add the weather data for the specific date
+        weather_info[city_name][date] = {
             'temperature': temperature,
             'humidity': humidity,
             'weather_condition': weather_condition
@@ -79,13 +82,76 @@ def query_city_weather(weather_info):
         # Check if the city exists in the weather data
         if city_query in weather_info:
             print(f"\nWeather Information for {city_query}:")
-            print(f"  Date: {weather_info[city_query]['date']}")
-            print(f"  Temperature: {weather_info[city_query]['temperature']}°C")
-            print(f"  Humidity: {weather_info[city_query]['humidity']}%")
-            print(f"  Condition: {weather_info[city_query]['weather_condition']}\n")
+            for date, data in weather_info[city_query].items():
+                print(f"  Date: {date}")
+                print(f"    Temperature: {data['temperature']}°C")
+                print(f"    Humidity: {data['humidity']}%")
+                print(f"    Condition: {data['weather_condition']}\n")
         else:
             print(f"'{city_query}' not found in the weather data.\n")
 
+# Function to update weather information for a specific city and date
+def update_weather_data(weather_info):
+    city_name = input("Enter the city name to update: ")
+    if city_name in weather_info:
+        date = input("Enter the date (dd/mm/yyyy) of the data to update: ")
+        if date in weather_info[city_name]:
+            print("Current data:", weather_info[city_name][date])
+            
+            # Allow user to update data
+            temperature = input("Enter the new temperature: ")
+            humidity = input("Enter the new humidity: ")
+            weather_condition = input("Enter the new weather condition: ")
+
+            # Update the data
+            weather_info[city_name][date] = {
+                'temperature': temperature,
+                'humidity': humidity,
+                'weather_condition': weather_condition
+            }
+            print(f"Weather data for {city_name} on {date} updated successfully.\n")
+        else:
+            print(f"No weather data found for {city_name} on {date}.\n")
+    else:
+        print(f"City {city_name} not found.\n")
+
+# Function to delete weather information for a specific city and date
+def delete_weather_data(weather_info):
+    city_name = input("Enter the city name to delete data: ")
+    if city_name in weather_info:
+        date = input("Enter the date (dd/mm/yyyy) of the data to delete: ")
+        if date in weather_info[city_name]:
+            del weather_info[city_name][date]
+            print(f"Weather data for {city_name} on {date} deleted successfully.\n")
+        else:
+            print(f"No weather data found for {city_name} on {date}.\n")
+    else:
+        print(f"City {city_name} not found.\n")
+
 # Main Program
-weather_info = get_weather_data()  # Collect weather data from the user
-query_city_weather(weather_info)  # Query weather information for cities
+def main():
+    weather_info = get_weather_data()  # Collect weather data from the user
+    
+    while True:
+        print("\nWhat would you like to do?")
+        print("1. Query weather data by city")
+        print("2. Update weather data")
+        print("3. Delete weather data")
+        print("4. Exit")
+        
+        choice = input("Enter your choice (1-4): ")
+        
+        if choice == '1':
+            query_city_weather(weather_info)
+        elif choice == '2':
+            update_weather_data(weather_info)
+        elif choice == '3':
+            delete_weather_data(weather_info)
+        elif choice == '4':
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+# Run the program
+main()
